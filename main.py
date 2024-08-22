@@ -1,6 +1,8 @@
 import pygame
 import sys
 
+#code
+
 pygame.init()
 
 background_colour = (255,255,255)
