@@ -1,7 +1,10 @@
 import pygame
 import sys
+import random
 
 #code
+
+datafile = open("data.txt", "w")
 
 pygame.init()
 
@@ -10,8 +13,6 @@ background_colour = (255,255,255)
 screen = pygame.display.set_mode((660,400))
 pygame.display.set_caption("window")
 screen.fill(background_colour)
-
-#images
 
 rock = pygame.image.load("images/rock.gif").convert()
 rock_rect = rock.get_rect(topleft=(0,0))
@@ -23,7 +24,7 @@ scissors = pygame.transform.scale(scissors, (220, 220))
 scissors_rect = scissors.get_rect(topleft=(440,0))
 
 userchoice = 1
-aichoice = 3
+aichoice = random.randint(1,3)
 
 running = True
 
@@ -33,17 +34,27 @@ while running:
             running = False
         if event.type == pygame.MOUSEBUTTONDOWN:
             mouse_pos = pygame.mouse.get_pos()  # Get mouse click position
-            
+            aichoice = random.randint(1,3)
+
             if rock_rect.collidepoint(mouse_pos):
                 print("user chose rock")
                 userchoice = 1
+                datafile.write("1")
             if paper_rect.collidepoint(mouse_pos):
                 print("user chose paper")
                 userchoice = 2
+                datafile.write("2")
             if scissors_rect.collidepoint(mouse_pos):
                 print("user chose scissors")
                 userchoice = 3
-
+                datafile.write("3")
+            
+            if aichoice == 1:
+                print("ai chose rock")
+            elif aichoice == 2:
+                print("ai chose paper")
+            elif aichoice == 3:
+                print("ai chose scissors")
 
             if userchoice == 1 and aichoice == 2:
                 print("ai wins!")
